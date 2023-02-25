@@ -45,12 +45,12 @@ public class TutorialController {
     
     
     @PutMapping("/add/Module/{title}")
-    public List<Moduledetails> addModule(@RequestBody Moduledetails module,@PathVariable("title") String title) {
+    public Tutorialdetails addModule(@RequestBody Moduledetails module,@PathVariable("title") String title) {
     	return tutorialServiceimpl.addModule(module,title);
     }
     
-    @PutMapping("/add/Topic/{title}")
-	public Tutorialdetails addTopicToModule(@PathVariable("title") String title,@PathVariable String moduleTitle,@RequestParam String topic) {
+    @PutMapping("/add/Topic/{title}/{moduleTitle}")
+	public Tutorialdetails addTopicToModule(@PathVariable("title") String title,@PathVariable("moduleTitle") String moduleTitle,@RequestParam String topic) {
 		return tutorialServiceimpl.addTopicToModule(title,moduleTitle,topic);
 	}
 	

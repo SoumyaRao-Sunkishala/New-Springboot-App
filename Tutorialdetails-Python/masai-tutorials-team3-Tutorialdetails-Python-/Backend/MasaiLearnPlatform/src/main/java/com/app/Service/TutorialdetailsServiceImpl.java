@@ -49,18 +49,17 @@ public class TutorialdetailsServiceImpl implements Tutorialdetailsservice {
 	}
 
 	@Override
-	public List<Moduledetails> addModule(Moduledetails module, String title) {
+	public Tutorialdetails addModule(Moduledetails module, String title) {
 
 		Tutorialdetails tutorial = tutorialRepo.findByTitle(title);
 		if (tutorial != null) {
 			List<Moduledetails> existingModule = tutorial.getModules();
-			
-
-			if (existingModule == null) {
+			if (!existingModule.contains(module)) {
 				List<Moduledetails> modules = tutorial.getModules();
 				modules.add(module);
 				tutorial.setModules(modules);
-				return existingModule;
+				tutorialRepo.save(tutorial);
+				return tutorial;
 			}
 			throw new UserException("Module already Present");
 
@@ -82,8 +81,10 @@ public class TutorialdetailsServiceImpl implements Tutorialdetailsservice {
 				{
 					List<Topics> topics = m.getTopics();
 					topics.add(new Topics(topic));
+					m.setTopics(topics);
 				}
 			}
+			tutorialdetails.setModules(modules);
 			return tutorialRepo.save(tutorialdetails);
 		}
 		throw new UserException("Tutorial details not found");

@@ -12,7 +12,7 @@ public interface Tutorialdetailsservice {
 
 	public Tutorialdetails findtutorialBytitle(String title);
 	
-	public List<Moduledetails> addModule(Moduledetails module, String title);
+	public Tutorialdetails addModule(Moduledetails module, String title);
 	
 	public Tutorialdetails addTopicToModule(String title,String moduleTitle, String topic);
 
